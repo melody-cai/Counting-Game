@@ -1,3 +1,5 @@
+import java.util.function.Predicate;
+
 /**
  * @Author: melody
  * @Date: 2019/3/4
@@ -5,22 +7,25 @@
  */
 public class CountingGame {
     public static void main(String[] args) {
-        int fizz = 3, buzz = 5, start = 1, end = 100;
-        checkNumber(fizz, buzz, start, end);
-    }
-    public static void checkNumber(int fizz, int buzz, int start, int end) {
+        int start = 1;
+        int end =  100;
+        int number1 = 3;
+        int number2 = 5;
         for (int i = start; i <= end; i++) {
-            if (i % fizz == 0) {
-                if (i % buzz == 0) {
-                    System.out.println("FizzBuzz");
-                } else {
-                    System.out.println("Fizz");
-                }
-            } else if (i % buzz == 0) {
-                System.out.println("Buzz");
-            } else {
-                System.out.println(i);
+            System.out.println(checkNum(i, n -> n % number1 == 0, n -> n % number2 == 0));
+        }
+    }
+
+    public static String checkNum(Integer number, Predicate<Integer> predicate1, Predicate<Integer> predicate2) {
+        if (predicate1.test(number)) {
+            if (predicate2.test(number)) {
+                return "FizzBuzz";
             }
+            return "Fizz";
+        } else if (predicate2.test(number)) {
+            return "Buzz";
+        } else {
+            return number.toString();
         }
     }
 }
